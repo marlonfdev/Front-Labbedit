@@ -5,9 +5,13 @@ import { goToFeed } from "../routes/Coordinator";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+interface Post {
+   id: number;
+}
+
 const Comments = () => {
    const navigate = useNavigate();
-   const [posts, setPosts] = useState<Array[]>([]);
+   const [posts, setPosts] = useState<Post[]>([]);
    const [comment, setComment] = useState("");
 
    const params = useParams();
@@ -26,7 +30,9 @@ const Comments = () => {
       }
    };
 
-   const post = posts.find((post) => post.id === params.id);
+   const postId = params.id ? parseInt(params.id) : undefined;
+
+   const post = postId !== undefined ? posts.find((post) => post.id === postId) : undefined;
 
    useEffect(() => {
       getPosts();

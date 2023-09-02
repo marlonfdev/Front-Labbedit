@@ -19,7 +19,9 @@ const Feed = () => {
             },
          });
          setPosts(response.data);
-      } catch (error) { /* empty */ }
+      } catch (error) {
+         /* empty */
+      }
    };
 
    const newPosts = async () => {
@@ -28,14 +30,16 @@ const Feed = () => {
             content: newPost,
          };
          const token = localStorage.getItem("token");
-         const response = await axios.post("http://localhost:3003/posts/", body, {
+         await axios.post("http://localhost:3003/posts/", body, {
             headers: {
                Authorization: token,
             },
          });
          setNewPost("");
          getPosts();
-      } catch (error) { /* empty */ }
+      } catch (error) {
+         /* empty */
+      }
    };
 
    useEffect(() => {
@@ -71,7 +75,7 @@ const Feed = () => {
             </form>
             <div className='mt-8 m-auto w-80 h-px border border-rose-400'></div>
          </section>
-         <section className="flex flex-col">
+         <section className='flex flex-col'>
             {posts
                .slice()
                .reverse()
